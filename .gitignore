@@ -49,3 +49,4 @@ bld/
 **/*.idea
 **/*.iml
 **/*out
+.node_modules

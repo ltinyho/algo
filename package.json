@@ -1,0 +1,22 @@
+{
+  "name": "algo",
+  "version": "1.0.0",
+  "description": "![t2](https://github.com/wangzheng0822/markdownphotos/blob/master/pics/qrcode_for_gh_9b0e7afdff20_258.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ltinyho/algo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ltinyho/algo/issues"
+  },
+  "homepage": "https://github.com/ltinyho/algo#readme",
+  "dependencies": {
+    "jest": "^25.1.0"
+  }
+}
