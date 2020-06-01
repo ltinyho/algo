@@ -50,3 +50,5 @@ bld/
 **/*.iml
 **/*out
 .node_modules
+node_modules
+.history
