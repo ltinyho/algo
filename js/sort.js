@@ -1,9 +1,36 @@
-// 选择排序,遍历数组,每次选择当前待排序中最小的元素交换到最前面
-function selectSort(arr) {
+function bubbleSort(arr) {
   for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      if (arr[j + 1] < arr[j]) {
+        swap(arr, j, j + 1);
+      }
+    }
+  }
+  return arr;
+}
+
+function insertSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    var cur = arr[i];
+    var min = i;
+    for (let j = i; j > 0; j--) {
+      if (cur < arr[j - 1]) {
+        arr[j] = arr[j - 1];
+        min = j - 1;
+      } else {
+        break;
+      }
+    }
+    arr[min] = cur;
+  }
+  return arr;
+}
+
+function selectSort(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
     var min = i;
     for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] < arr[i]) {
+      if (arr[j] < arr[min]) {
         min = j;
       }
     }
@@ -12,22 +39,89 @@ function selectSort(arr) {
   return arr;
 }
 
-// 插入排序,跟整理牌一样,每次插入时判断插入的位置,从后面插入,小于则交换位置,左侧一直有序,遍历到结尾自然全部有序
-// [7,2,5,1] [7] [2,5,1] => [2,7] [5,1]
-// [2,7,5,1] [2,7] [5,1] => [2,5,7] [1]
-// [2,5,7,1]
-// [1,2,5,7]
-function insertSort(arr) {
-  // console.log(arr);
-  for (let i = 1; i < arr.length; i++) {
-    for (let j = i; j > 0; j--) {
-      if (arr[j] < arr[j - 1]) {
-        swap(arr, j, j - 1);
-        // console.log(arr,i);
-      }
+function mergeSort(arr) {
+  return mergeSortHelper(arr, 0, arr.length - 1);
+}
+
+function mergeSortHelper(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
+  var mid = Math.floor(arr.length / 2);
+  return merge(mergeSortHelper(arr.slice(0, mid)), mergeSortHelper(arr.slice(mid, arr.length)));
+}
+
+function merge(left, right) {
+  var m = left.length - 1;
+  var n = right.length - 1;
+
+  while (n > 0) {
+    if (m > 0 && left[m] > right[n]) {
+      left[m + n - 1] = left[m];
+      m--;
+    } else {
+      left[m + n - 1] = left[n];
+      n--;
     }
   }
-  return arr
+  return left;
+}
+
+function quickSort(arr) {
+  quickSortHelp(arr, 0, arr.length - 1);
+  return arr;
+}
+
+function partition(arr, l, r) {
+  var i = l;
+  var pivot = arr[r];
+  for (let j = i; j < r; j++) {
+    if (arr[j] < pivot) {
+      swap(arr, i, j);
+      i++;
+    }
+  }
+  swap(arr, i, r);
+  return i;
+}
+
+function quickSortHelp(arr, l, r) {
+  if (l >= r) {
+    return;
+  }
+  var pivot = partition(arr, l, r);
+  quickSortHelp(arr, l, pivot - 1);
+  quickSortHelp(arr, pivot + 1, r);
+}
+
+// 查找第N大的元素
+function findKthLargest(arr, n) {
+  return selectHelper(arr, 0, arr.length - 1, arr.length - n);
+}
+
+function selectPartition(arr, l, r) {
+  var i = l;
+  var pivot = arr[r];
+
+  for (let j = l; j < r; j++) {
+    if (arr[j] < pivot) {
+      swap(arr, j, i);
+      i++;
+    }
+  }
+  swap(arr, i, r);
+  return i;
+}
+
+function selectHelper(arr, l, r, n) {
+  var pivot = selectPartition(arr, l, r);
+  if ((pivot + 1) === n) {
+    return arr[n];
+  } else if ((pivot + 1) < n) {
+    return selectHelper(arr, pivot + 1, r, n);
+  } else {
+    return selectHelper(arr, l, pivot - 1, n);
+  }
 }
 
 function swap(arr, i, j) {
@@ -45,17 +139,19 @@ function isSort(arr) {
   return true;
 }
 
-
-function calTime(func){
-  var begin =  Date.now()
-  func()
-  var end =  Date.now()
-  return end-begin
+function calTime(func) {
+  var begin = Date.now();
+  func();
+  var end = Date.now();
+  return end - begin;
 }
 
 module.exports = {
   selectSort,
+  bubbleSort,
   isSort,
   insertSort,
-  calTime
+  mergeSort,
+  findKthLargest,
+  calTime,
 };
