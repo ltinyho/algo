@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
     print('--- ac automata ---')
     m_str = 'fuck you, what is that shit, TMD你就是个傻叉傻叉傻叉叉'
-    print('original str  : {}'.format(m_str))
+    print('original str.js  : {}'.format(m_str))
 
     filter_range_list = ac_automata(m_str, ac_trie)
     str_filtered = m_str

@@ -3,6 +3,7 @@ const {
   insertSort,
   bubbleSort,
   findKthLargest,
+  findInSort,
   mergeSort,
   quickSort,
   isSort,
@@ -63,8 +64,13 @@ it('比较时间', function () {
 
 it('选择第 N 大的元素', function () {
   var init = random(100, 1, 10000);
-  init = [7, 2, 5, 1,10,123,12];
+  init = [7, 2, 5, 1, 10, 123, 12];
   var ele = findKthLargest(init, 2);
+  console.log(ele);
+});
+it('二分查找有序元素', function () {
+  var init = [1, 2, 3, 4, 6, 7, 77, 12343, 111111];
+  var ele = findInSort(init, 7);
   console.log(ele);
 });
 

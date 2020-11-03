@@ -124,6 +124,22 @@ function selectHelper(arr, l, r, n) {
   }
 }
 
+function findInSort(arr, val) {
+  var l = 0;
+  var r = arr.length;
+  while (l <= r) {
+    var mid = Math.floor((l + r) / 2);
+    if (arr[mid] === val) {
+      return mid;
+    } else if (arr[mid] < val) {
+      l = mid + 1;
+    } else {
+      r = mid - 1;
+    }
+  }
+  return -1;
+}
+
 function swap(arr, i, j) {
   var tmp = arr[i];
   arr[i] = arr[j];
@@ -153,5 +169,6 @@ module.exports = {
   insertSort,
   mergeSort,
   findKthLargest,
+  findInSort,
   calTime,
 };
